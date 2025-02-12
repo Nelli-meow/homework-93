@@ -16,7 +16,7 @@ describe('AppController', () => {
 
   describe('root', () => {
     it('should return "Hello World!"', () => {
-      expect(appController.getAllArtists()).toBe('Hello World!');
+      expect(appController.getAll()).toBe('Hello World!');
     });
   });
 });
