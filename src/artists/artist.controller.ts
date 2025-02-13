@@ -18,7 +18,7 @@ import { CreateArtistDto } from './create-artist.dto';
 export class ArtistController {
   constructor(
     @InjectModel(Artist.name)
-    private readonly artistModel: Model<ArtistDocument>,
+    private artistModel: Model<ArtistDocument>,
   ) {}
 
   @Get()
