@@ -10,7 +10,6 @@ import { TrackController } from './tracks/tracks.controller';
 import { Track, TrackSchema } from './schemas/track.schema';
 import { Fixtures } from './fixtures';
 
-
 @Module({
   imports: [
     MongooseModule.forRoot('mongodb://localhost/spotify'),
