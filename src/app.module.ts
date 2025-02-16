@@ -8,14 +8,17 @@ import { AlbumController } from './albums/album.controller';
 import { Album, AlbumsSchema } from './schemas/album.schema';
 import { TrackController } from './tracks/tracks.controller';
 import { Track, TrackSchema } from './schemas/track.schema';
+import { User, UserSchema } from './schemas/user.schema';
+import { UsersController } from './users/users.controller';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost/spotify'),
+    MongooseModule.forRoot('mongodb://localhost/spotify-2'),
     MongooseModule.forFeature([
       { name: Artist.name, schema: ArtistSchema },
       { name: Album.name, schema: AlbumsSchema },
       { name: Track.name, schema: TrackSchema },
+      { name: User.name, schema: UserSchema },
     ]),
   ],
   controllers: [
@@ -23,6 +26,7 @@ import { Track, TrackSchema } from './schemas/track.schema';
     ArtistController,
     AlbumController,
     TrackController,
+    UsersController,
   ],
   providers: [AppService],
 })

@@ -6,16 +6,16 @@ export type AlbumsDocument = Album & Document;
 
 @Schema()
 export class Album {
-  @Prop({ required: true, type: String })
+  @Prop({ required: true })
   name: string;
 
-  @Prop({ default: null, type: String })
+  @Prop({ default: null })
   image: string;
 
   @Prop({ required: true, type: mongoose.Types.ObjectId, ref: 'Artist' })
   artist: Artist;
 
-  @Prop({ required: true, type: String })
+  @Prop({ required: true })
   year: string;
 }
 

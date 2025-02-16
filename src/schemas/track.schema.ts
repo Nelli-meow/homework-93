@@ -6,7 +6,7 @@ export type TrackDocument = Track & Document;
 
 @Schema()
 export class Track {
-  @Prop({ required: true, type: String })
+  @Prop({ required: true })
   name: string;
 
   @Prop({ default: null, type: mongoose.Types.ObjectId, ref: 'Album' })
