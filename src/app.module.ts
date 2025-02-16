@@ -8,7 +8,6 @@ import { AlbumController } from './albums/album.controller';
 import { Album, AlbumsSchema } from './schemas/album.schema';
 import { TrackController } from './tracks/tracks.controller';
 import { Track, TrackSchema } from './schemas/track.schema';
-import { Fixtures } from './fixtures';
 
 @Module({
   imports: [
@@ -25,6 +24,6 @@ import { Fixtures } from './fixtures';
     AlbumController,
     TrackController,
   ],
-  providers: [AppService, Fixtures],
+  providers: [AppService],
 })
 export class AppModule {}

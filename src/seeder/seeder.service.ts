@@ -1,16 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
+import { Artist, ArtistDocument } from '../schemas/artist.schema';
 import { Model } from 'mongoose';
-import { Artist } from './schemas/artist.schema';
-import { Album } from './schemas/album.schema';
-import { Track } from './schemas/track.schema';
+import { Album, AlbumsDocument } from '../schemas/album.schema';
+import { Track, TrackDocument } from '../schemas/track.schema';
 
 @Injectable()
-export class Fixtures {
+export class SeederService {
   constructor(
-    @InjectModel(Artist.name) private artistModel: Model<Artist>,
-    @InjectModel(Album.name) private albumModel: Model<Album>,
-    @InjectModel(Track.name) private trackModel: Model<Track>,
+    @InjectModel(Artist.name) private artistModel: Model<ArtistDocument>,
+    @InjectModel(Album.name) private albumModel: Model<AlbumsDocument>,
+    @InjectModel(Track.name) private trackModel: Model<TrackDocument>,
   ) {}
 
   async seed() {
@@ -21,13 +21,13 @@ export class Fixtures {
     const [oxxymiron, noize] = await this.artistModel.create([
       {
         name: 'Oxxymiron',
-        photo: './fixtures/artists/scale_1200.jpg',
-        information: 'Российский рэпер',
+        image: './fixtures/artists/scale_1200.jpg',
+        description: 'Российский рэпер',
       },
       {
         name: 'Noize MC',
-        photo: './fixtures/artists/Noize_MC_MRPL_City_2018.jpg',
-        information: 'Российский музыкант',
+        image: './fixtures/artists/Noize_MC_MRPL_City_2018.jpg',
+        description: 'Российский музыкант',
       },
     ]);
 
