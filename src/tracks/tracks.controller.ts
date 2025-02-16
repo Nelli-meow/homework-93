@@ -6,12 +6,15 @@ import {
   NotFoundException,
   Param,
   Post,
+  UseGuards,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Album, AlbumsDocument } from '../schemas/album.schema';
 import { Model } from 'mongoose';
 import { Track, TrackDocument } from '../schemas/track.schema';
 import { CreateTrackDto } from './create-track.dto';
+import { TokenAuthGuard } from '../token-auth/token-auth.guard';
+import { RolesGuard } from '../roles-guard/roles-guard.guard';
 
 @Controller('tracks')
 export class TrackController {
@@ -35,6 +38,7 @@ export class TrackController {
     return track;
   }
 
+  @UseGuards(TokenAuthGuard)
   @Post()
   async createOneTrack(@Body() trackData: CreateTrackDto) {
     const album = await this.albumModel.findById(trackData.album);
@@ -48,6 +52,7 @@ export class TrackController {
     return newTrack.save();
   }
 
+  @UseGuards(TokenAuthGuard, RolesGuard)
   @Delete(':id')
   async deleteTrack(@Param('id') id: string) {
     const deletedTrack = await this.trackModel.findByIdAndDelete(id);
