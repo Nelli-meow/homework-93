@@ -4,6 +4,8 @@ import { Artist, ArtistDocument } from '../schemas/artist.schema';
 import { Model } from 'mongoose';
 import { Album, AlbumsDocument } from '../schemas/album.schema';
 import { Track, TrackDocument } from '../schemas/track.schema';
+import { User, UserDocument } from '../schemas/user.schema';
+import { randomUUID } from 'crypto';
 
 @Injectable()
 export class SeederService {
@@ -11,12 +13,14 @@ export class SeederService {
     @InjectModel(Artist.name) private artistModel: Model<ArtistDocument>,
     @InjectModel(Album.name) private albumModel: Model<AlbumsDocument>,
     @InjectModel(Track.name) private trackModel: Model<TrackDocument>,
+    @InjectModel(User.name) private userModel: Model<UserDocument>,
   ) {}
 
   async seed() {
     await this.artistModel.deleteMany({});
     await this.albumModel.deleteMany({});
     await this.trackModel.deleteMany({});
+    await this.userModel.deleteMany({});
 
     const [oxxymiron, noize] = await this.artistModel.create([
       {
@@ -60,5 +64,22 @@ export class SeederService {
         number: 2,
       },
     ]);
+
+    await this.userModel.create(
+      {
+        email: 'Jane@email',
+        password: '123',
+        token: randomUUID(),
+        role: 'user',
+        displayName: 'meow',
+      },
+      {
+        email: 'John@email',
+        password: '666',
+        token: randomUUID(),
+        role: 'admin',
+        displayName: 'bark',
+      },
+    );
   }
 }
